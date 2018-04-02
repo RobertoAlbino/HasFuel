@@ -1,0 +1,11 @@
+.center {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    margin: auto;  
+}
+
+.image-center {
+    margin: 0 auto;
+}
