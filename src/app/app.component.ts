@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +6,5 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
   styleUrls: ['./app.component.css']
 })
 export class AppComponent { 
-
   constructor() {}
 }
