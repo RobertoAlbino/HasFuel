@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,9 +8,5 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 })
 export class AppComponent { 
 
-  constructor(private modalService: NgbModal) {}
-  
-  open() {
-    this.modalService.open(null);
-  }
+  constructor() {}
 }
