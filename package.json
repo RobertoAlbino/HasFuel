@@ -12,6 +12,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "^0.5.0",
+    "@angular-devkit/schematics": "^0.5.0",
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
@@ -22,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^1.1.0",
+    "@schematics/angular": "^0.5.0",
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.6",
