@@ -1,5 +1,8 @@
 import { NgModule, Component } from '@angular/core';
-import { NgbModal, NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { StringUtils } from  './../../utils/StringUtils';
+import { IUsuarioModel } from './../../interfaces/IUsuarioModel';
 
 @Component({
     selector: 'cadastro-usuario-modal',
@@ -7,8 +10,29 @@ import { NgbModal, NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 })
 export class ModalUsuarioTemplate {
 
+    private erroValidacao: boolean = false;;
+    private confirmarSenha: string;
+    public usuario: IUsuarioModel = {
+        id: 0,
+        nome: "",
+        senha: "",
+        email: ""
+    };
+
     constructor(public activeModal: NgbActiveModal) { }
 
+    public validarUsuario() {
+        if (StringUtils.isNullOrEmpty(this.usuario.nome)  ||
+            StringUtils.isNullOrEmpty(this.usuario.senha) ||
+            StringUtils.isNullOrEmpty(this.confirmarSenha) ||
+            StringUtils.isNullOrEmpty(this.usuario.email)) {
+                this.erroValidacao = true;
+                return;
+            }
+        else {
+            this.erroValidacao = false;
+        }
+    }
 }
 
 @Component({

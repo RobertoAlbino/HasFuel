@@ -7,24 +7,29 @@
 <div class="modal-body">
     <form role="form">
         <div class="form-group">
-            <input type="text" name="nome" id="nome" class="form-control input-sm" placeholder="Nome">
+            <input type="text" name="nome" id="nome" class="form-control input-sm" placeholder="Nome" [(ngModel)]="usuario.nome">
         </div>
         <div class="form-group">
-            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="E-mail">
+            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="E-mail" [(ngModel)]="usuario.email">
         </div>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <input type="password" name="senha" id="senha" class="form-control input-sm" placeholder="Senha">
+                    <input type="password" name="senha" id="senha" class="form-control input-sm" placeholder="Senha" [(ngModel)]="usuario.senha">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <input type="password" name="confirmar-senha" id="confirmar-senha" class="form-control input-sm" placeholder="Confirmar senha">
+                    <input type="password" name="confirmar-senha" id="confirmar-senha" class="form-control input-sm" placeholder="Confirmar senha" [(ngModel)]="confirmarSenha">
                 </div>
             </div>
         </div>
-        <input type="button" value="Cadastrar" class="btn btn-success btn-block" (click)="run()">
+        <input type="button" value="Cadastrar" class="btn btn-success btn-block" (click)="validarUsuario()">
+        <p>
+            <ngb-alert [dismissible]="true" *ngIf="erroValidacao" type="danger">
+              <strong>Atenção!</strong> Nem todos os dados foram preenchidos corretamente.
+            </ngb-alert>
+          </p>
     </form>
 </div>
 <div class="modal-footer">
