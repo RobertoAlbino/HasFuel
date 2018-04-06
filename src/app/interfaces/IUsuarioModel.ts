@@ -1,8 +1,6 @@
-interface IUsuarioModel {
+export interface IUsuarioModel {
     id?: number,
-    nome: string,
+    login: string,
     senha: string,
     email: string
 }
-
-export { IUsuarioModel }

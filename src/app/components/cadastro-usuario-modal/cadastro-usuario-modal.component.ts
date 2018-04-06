@@ -1,10 +1,12 @@
 import { NgModule, Component } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import 'rxjs/add/operator/map';
 
 import { StringUtils } from  './../../utils/StringUtils';
 import { IUsuarioModel } from './../../interfaces/IUsuarioModel';
+import { IAlert } from './../../interfaces/IAlert';
+import { EAlertType } from './../../enums/EAlertType';
+import { HttpService } from './../../services/httpService';
+import { AlertService } from './../../services/alertService';
 
 @Component({
     selector: 'cadastro-usuario-modal',
@@ -12,51 +14,67 @@ import { IUsuarioModel } from './../../interfaces/IUsuarioModel';
 })
 export class ModalUsuarioTemplate {
 
-    private http: HttpClient;
-    private formularioInvalido: boolean = false;;
     private confirmarSenha: string;
+    private alerts: Array<IAlert> = [];
+    private httpService: HttpService;
+    private alertService: AlertService;
 
     public usuario: IUsuarioModel = {
         id: 0,
-        nome: "",
+        login: "",
         senha: "",
         email: ""
     };
 
-    constructor(private activeModal: NgbActiveModal, http: HttpClient) {
-        this.http = http;
+    constructor(private activeModal: NgbActiveModal, httpService: HttpService, alertService: AlertService) {
+        this.httpService = httpService;
+        this.alertService = alertService;
     }
 
-    private validarFormularioCadastroUsuario() {
-        if (StringUtils.isNullOrEmpty(this.usuario.nome)  ||
-            StringUtils.isNullOrEmpty(this.usuario.senha) ||
+    private limparTodosAlerts() {
+        this.alerts = [];
+    }
+
+    private criarAlert(tipo: EAlertType, strong: string, mensagem: string) {
+        this.alerts.push(this.alertService.criarAlert(tipo, strong, mensagem));
+    }
+
+    private destruirAlert(alert: IAlert) {
+        this.alerts.splice(this.alerts.indexOf(alert, 1));
+    }
+
+    private compararSenhasInformadas(primeiraSenha: string, segundaSenha: string) {
+        if (primeiraSenha === segundaSenha)
+            return true;    
+    }
+
+    private validarFormularioCadastroUsuarioInvalido() {
+        if (StringUtils.isNullOrEmpty(this.usuario.login)  ||
+            StringUtils.isNullOrEmpty(this.usuario.senha)  ||
             StringUtils.isNullOrEmpty(this.confirmarSenha) ||
             StringUtils.isNullOrEmpty(this.usuario.email)) {
-                this.formularioInvalido = true;
-                return false;
+                return true;
             }
-        
-        return true;
     }
 
     private cadastrarUsuario() {
-        debugger;
-        if (!this.validarFormularioCadastroUsuario())
+        if (this.validarFormularioCadastroUsuarioInvalido()) {
+            this.criarAlert(EAlertType.Danger, "Atenção!", "Nem todos os campos foram preenchidos corretamente.");
             return;
-    
-        let headers = new HttpHeaders();
-        let params = new HttpParams();
-        headers.append('Content-Type', 'application/json');
-        this.usuario.id = 1;
-        params.set('Usuario', JSON.stringify(this.usuario));
-        this.http.get('http://localhost:8080/api/usuarios/consultar', { 
-            headers, params 
-        }).map(ret => ret.toString())
-        .subscribe(data => {
-            console.log(data);
-        });
-    
-    } 
+        }
+        if (!this.compararSenhasInformadas(this.usuario.senha, this.confirmarSenha)) {
+            this.criarAlert(EAlertType.Danger, "Atenção!", "Senhas estão divergindo.");
+            return;
+        }  
+
+        this.httpService.post("usuarios/criar", JSON.stringify(this.usuario), 
+        (callback: object, sucesso: boolean) => { 
+            if (sucesso)
+                this.criarAlert(EAlertType.Success, "Sucesso!", `Usuário ${ callback.login } cadastrado com sucesso.`);
+            else
+                this.criarAlert(EAlertType.Danger, "Ops!",  `Não foi possível cadastrar o usuário, motivo: ${ callback.message }.`);
+        })
+    }   
 }
 
 @Component({

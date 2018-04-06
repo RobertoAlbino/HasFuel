@@ -1,13 +1,18 @@
+// Módulos importados
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpParams, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpHandler, HttpClientModule } from '@angular/common/http';
 
-
+// Componentes da aplicação
 import { AppComponent } from './app.component';
 import { CadastroUsuarioModalComponent, ModalUsuarioTemplate } from './components/cadastro-usuario-modal/cadastro-usuario-modal.component'
+
+// Serviços da aplicação
+import { HttpService } from './services/httpService'
+import { AlertService } from './services/alertService'
 
 @NgModule({
   declarations: [
@@ -19,11 +24,12 @@ import { CadastroUsuarioModalComponent, ModalUsuarioTemplate } from './component
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule, 
   ],
   providers: [ 
-    HttpClient,
-    HttpHandler 
+    HttpService,
+    AlertService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

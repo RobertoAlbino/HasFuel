@@ -1,12 +1,17 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { CadastroUsuarioModalComponent } from './cadastro-usuario-modal.component';
+import { ModalUsuarioTemplate } from './cadastro-usuario-modal.component';
 
-describe('CadastroUsuarioModalComponent', () => {
+describe('CadastroUsuarioModal', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CadastroUsuarioModalComponent
+        ModalUsuarioTemplate
       ],
-    }).compileComponents();
-  }))});
+    }).compileComponents();  
+  }))
+
+  it('Testar se a comparação entre as duas senha está funcionando', () => {
+    expect().toEqual();
+  })
+});
