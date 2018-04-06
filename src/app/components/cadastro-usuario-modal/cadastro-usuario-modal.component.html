@@ -24,9 +24,9 @@
                 </div>
             </div>
         </div>
-        <input type="button" value="Cadastrar" class="btn btn-success btn-block" (click)="validarUsuario()">
+        <input type="button" value="Cadastrar" class="btn btn-success btn-block" (click)="cadastrarUsuario()">
         <p>
-            <ngb-alert [dismissible]="true" *ngIf="erroValidacao" type="danger">
+            <ngb-alert [dismissible]="true" *ngIf="formularioInvalido" type="danger">
               <strong>Atenção!</strong> Nem todos os dados foram preenchidos corretamente.
             </ngb-alert>
           </p>

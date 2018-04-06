@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpHeaders, HttpParams, HttpHandler } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -20,7 +21,10 @@ import { CadastroUsuarioModalComponent, ModalUsuarioTemplate } from './component
     FormsModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [ 
+    HttpClient,
+    HttpHandler 
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     CadastroUsuarioModalComponent,

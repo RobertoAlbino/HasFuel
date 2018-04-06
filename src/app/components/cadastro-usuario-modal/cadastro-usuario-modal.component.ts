@@ -1,5 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 import { StringUtils } from  './../../utils/StringUtils';
 import { IUsuarioModel } from './../../interfaces/IUsuarioModel';
@@ -10,8 +12,10 @@ import { IUsuarioModel } from './../../interfaces/IUsuarioModel';
 })
 export class ModalUsuarioTemplate {
 
-    private erroValidacao: boolean = false;;
+    private http: HttpClient;
+    private formularioInvalido: boolean = false;;
     private confirmarSenha: string;
+
     public usuario: IUsuarioModel = {
         id: 0,
         nome: "",
@@ -19,20 +23,40 @@ export class ModalUsuarioTemplate {
         email: ""
     };
 
-    constructor(public activeModal: NgbActiveModal) { }
+    constructor(private activeModal: NgbActiveModal, http: HttpClient) {
+        this.http = http;
+    }
 
-    public validarUsuario() {
+    private validarFormularioCadastroUsuario() {
         if (StringUtils.isNullOrEmpty(this.usuario.nome)  ||
             StringUtils.isNullOrEmpty(this.usuario.senha) ||
             StringUtils.isNullOrEmpty(this.confirmarSenha) ||
             StringUtils.isNullOrEmpty(this.usuario.email)) {
-                this.erroValidacao = true;
-                return;
+                this.formularioInvalido = true;
+                return false;
             }
-        else {
-            this.erroValidacao = false;
-        }
+        
+        return true;
     }
+
+    private cadastrarUsuario() {
+        debugger;
+        if (!this.validarFormularioCadastroUsuario())
+            return;
+    
+        let headers = new HttpHeaders();
+        let params = new HttpParams();
+        headers.append('Content-Type', 'application/json');
+        this.usuario.id = 1;
+        params.set('Usuario', JSON.stringify(this.usuario));
+        this.http.get('http://localhost:8080/api/usuarios/consultar', { 
+            headers, params 
+        }).map(ret => ret.toString())
+        .subscribe(data => {
+            console.log(data);
+        });
+    
+    } 
 }
 
 @Component({
@@ -41,7 +65,7 @@ export class ModalUsuarioTemplate {
 })
 export class CadastroUsuarioModalComponent {
 
-    constructor(private modalService: NgbModal) { }
+    constructor(private modalService: NgbModal) {}
 
     public abrirModal() {
         this.modalService.open(ModalUsuarioTemplate);
