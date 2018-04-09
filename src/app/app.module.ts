@@ -5,6 +5,10 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpParams, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router'
+
+// Rotas
+import { rootRouterConfig } from './app.routes'
 
 // Componentes da aplicação
 import { AppComponent } from './app.component';
@@ -25,7 +29,8 @@ import { AlertService } from './services/alertService'
     BrowserAnimationsModule,
     FormsModule,
     NgbModule.forRoot(),
-    HttpClientModule, 
+    HttpClientModule,
+    RouterModule.forRoot(rootRouterConfig, { useHash: false }) 
   ],
   providers: [ 
     HttpService,
