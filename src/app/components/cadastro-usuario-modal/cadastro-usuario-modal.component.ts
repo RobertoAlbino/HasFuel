@@ -6,7 +6,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StringUtils } from  './../../utils/StringUtils';
 
 // Interfaces
-import { IUsuarioModel } from './../../interfaces/Usuario/IUsuarioModel';
+import { IUsuarioModel } from './../../interfaces/usuario/IUsuarioModel';
 import { IUsuarioCriarRetornoModel } from './../../interfaces/usuario/IUsuarioCriarRetornoModel';
 import { IAlert } from './../../interfaces/IAlert';
 
