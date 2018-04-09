@@ -23,10 +23,10 @@ import { AlertService } from './../../services/alertService';
 })
 export class ModalUsuarioTemplateComponent {
 
-    private confirmarSenha: string;
-    private alerts: Array<IAlert> = [];
     private httpService: HttpService;
     private alertService: AlertService;
+    public confirmarSenha: string;
+    public alerts: Array<IAlert> = [];
 
     public usuario: IUsuarioModel = {
         id: 0,
@@ -35,7 +35,7 @@ export class ModalUsuarioTemplateComponent {
         email: ""
     };
 
-    constructor(private activeModal: NgbActiveModal, httpService: HttpService, alertService: AlertService) {
+    constructor(public activeModal: NgbActiveModal, httpService: HttpService, alertService: AlertService) {
         this.httpService = httpService;
         this.alertService = alertService;
     }
@@ -52,11 +52,6 @@ export class ModalUsuarioTemplateComponent {
         this.alerts.splice(this.alerts.indexOf(alert, 1));
     }
 
-    private compararSenhasInformadas(primeiraSenha: string, segundaSenha: string) {
-        if (primeiraSenha === segundaSenha)
-            return true;    
-    }
-
     private validarFormularioCadastroUsuarioInvalido() {
         if (StringUtils.isNullOrEmpty(this.usuario.login)  ||
             StringUtils.isNullOrEmpty(this.usuario.senha)  ||
@@ -66,7 +61,12 @@ export class ModalUsuarioTemplateComponent {
             }
     }
 
-    private cadastrarUsuario() {
+    private compararSenhasInformadas(primeiraSenha: string, segundaSenha: string) {
+        if (primeiraSenha === segundaSenha)
+            return true;    
+    }
+
+    public cadastrarUsuario() {
         if (this.validarFormularioCadastroUsuarioInvalido()) {
             this.criarAlert(EAlertType.Danger, "Atenção!", "Nem todos os campos foram preenchidos corretamente.");
             return;
@@ -87,7 +87,7 @@ export class ModalUsuarioTemplateComponent {
                 this.criarAlert(EAlertType.Danger, "Ops!",  `Não foi possível cadastrar o usuário, motivo: ${ callback.message }.`);
             }                
         })
-    }   
+    } 
 }
 
 @Component({
