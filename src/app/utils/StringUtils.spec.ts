@@ -9,4 +9,19 @@ describe('Classe StringUtils', () => {
     expect(StringUtils.isNullOrEmpty(null)).toEqual(true);
     expect(StringUtils.isNullOrEmpty(undefined)).toEqual(true); 
   })
+  it('Testar se a função que verifica array de nulos está funcionando', () => {
+    let camposPreenchidos: string[] = [
+      "teste",
+      'teste',
+      'Teste'
+    ];
+    let camposVazios: string[] = [
+      "",
+      '',
+      'Teste',
+      ""
+    ];
+    expect(StringUtils.validarPreenchimentoCamposForm(camposPreenchidos)).toEqual(true);
+    expect(StringUtils.validarPreenchimentoCamposForm(camposVazios)).toEqual(false);
+  })
 });

@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class HttpService {
 
-    private server: string = 'http://localhost:8080/api/';
+    private server: string = 'https://controle-java-backend.herokuapp.com/api/';
     private sucesso: boolean = true;
     private header: HttpHeaders = new HttpHeaders ({
         'Content-Type':  'application/json'

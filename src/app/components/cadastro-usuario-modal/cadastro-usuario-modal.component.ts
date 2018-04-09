@@ -52,13 +52,16 @@ export class ModalUsuarioTemplateComponent {
         this.alerts.splice(this.alerts.indexOf(alert, 1));
     }
 
-    private validarFormularioCadastroUsuarioInvalido() {
-        if (StringUtils.isNullOrEmpty(this.usuario.login)  ||
-            StringUtils.isNullOrEmpty(this.usuario.senha)  ||
-            StringUtils.isNullOrEmpty(this.confirmarSenha) ||
-            StringUtils.isNullOrEmpty(this.usuario.email)) {
-                return true;
-            }
+    private validarFormularioCadastro() {
+        let camposFormCadastro: string[] = [
+            this.usuario.login,
+            this.usuario.senha,
+            this.confirmarSenha,
+            this.usuario.email
+        ];
+
+        if (StringUtils.validarPreenchimentoCamposForm(camposFormCadastro))
+            return true;
     }
 
     private compararSenhasInformadas(primeiraSenha: string, segundaSenha: string) {
@@ -67,7 +70,7 @@ export class ModalUsuarioTemplateComponent {
     }
 
     public cadastrarUsuario() {
-        if (this.validarFormularioCadastroUsuarioInvalido()) {
+        if (!this.validarFormularioCadastro()) {
             this.criarAlert(EAlertType.Danger, "Atenção!", "Nem todos os campos foram preenchidos corretamente.");
             return;
         }
