@@ -7,7 +7,7 @@ import { StringUtils } from  './../../utils/StringUtils';
 
 // Interfaces
 import { IUsuarioModel } from './../../interfaces/Usuario/IUsuarioModel';
-import { IUsuarioRetornoCadastroModel } from './../../interfaces/Usuario/IUsuarioRetornoCadastroModel';
+import { IUsuarioCriarRetornoModel } from './../../interfaces/usuario/IUsuarioCriarRetornoModel';
 import { IAlert } from './../../interfaces/IAlert';
 
 // Enums
@@ -21,7 +21,7 @@ import { AlertService } from './../../services/alertService';
     selector: 'cadastro-usuario-modal',
     templateUrl: './cadastro-usuario-modal.component.html'
 })
-export class ModalUsuarioTemplate {
+export class ModalUsuarioTemplateComponent {
 
     private confirmarSenha: string;
     private alerts: Array<IAlert> = [];
@@ -77,10 +77,11 @@ export class ModalUsuarioTemplate {
         }  
 
         this.httpService.post("usuarios/criar", JSON.stringify(this.usuario), 
-        (callback: IUsuarioRetornoCadastroModel, sucesso: boolean) => { 
+        (callback: IUsuarioCriarRetornoModel, sucesso: boolean) => { 
             if (sucesso) {
+                debugger;
                 this.destruirTodosAlerts();
-                this.criarAlert(EAlertType.Success, "Sucesso!", `Usuário ${ callback.login } cadastrado com sucesso.`);
+                this.criarAlert(EAlertType.Success, "Sucesso!", `Usuário ${ callback.objeto.login } cadastrado com sucesso.`);
             }                
             else {
                 this.criarAlert(EAlertType.Danger, "Ops!",  `Não foi possível cadastrar o usuário, motivo: ${ callback.message }.`);
@@ -98,6 +99,6 @@ export class CadastroUsuarioModalComponent {
     constructor(private modalService: NgbModal) {}
 
     public abrirModal() {
-        this.modalService.open(ModalUsuarioTemplate);
+        this.modalService.open(ModalUsuarioTemplateComponent);
     }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
-import { CadastroUsuarioModalComponent } from './components/cadastro-usuario-modal/cadastro-usuario-modal.component'
+import { LoginComponent } from './components/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,9 @@ import { CadastroUsuarioModalComponent } from './components/cadastro-usuario-mod
 })
 export class AppComponent { 
   
-  constructor(public modalService : NgbModal) {}
+  constructor(private router: Router) {}
 
-  public instanciarModalCadastroUsuario() {
-    new CadastroUsuarioModalComponent(this.modalService).abrirModal();
+  ngOnInit() {
+    this.router.navigate([''])
   }
 }

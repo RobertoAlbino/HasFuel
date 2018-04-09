@@ -1,12 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { ModalUsuarioTemplateComponent } from './cadastro-usuario-modal.component';
+import { HomeComponent } from './home.component';
 
-describe('Compilação do componente CadastroUsuarioModal', () => {
+describe('Compilação do componente Home', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ModalUsuarioTemplateComponent
+        HomeComponent
       ],
     }).compileComponents();  
   }))

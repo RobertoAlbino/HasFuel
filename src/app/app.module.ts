@@ -12,17 +12,22 @@ import { rootRouterConfig } from './app.routes'
 
 // Componentes da aplicação
 import { AppComponent } from './app.component';
-import { CadastroUsuarioModalComponent, ModalUsuarioTemplate } from './components/cadastro-usuario-modal/cadastro-usuario-modal.component'
+import { LoginComponent } from './components/login/login.component';
+import { CadastroUsuarioModalComponent, ModalUsuarioTemplateComponent } from './components/cadastro-usuario-modal/cadastro-usuario-modal.component'
+import { HomeComponent } from './components/home/home.component';
 
 // Serviços da aplicação
 import { HttpService } from './services/httpService'
 import { AlertService } from './services/alertService'
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     CadastroUsuarioModalComponent,
-    ModalUsuarioTemplate
+    ModalUsuarioTemplateComponent,
+    HomeComponent
   ],  
   imports: [
     BrowserModule,
@@ -30,7 +35,7 @@ import { AlertService } from './services/alertService'
     FormsModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: false }) 
+    RouterModule.forRoot(rootRouterConfig, { useHash: true }) 
   ],
   providers: [ 
     HttpService,
@@ -39,7 +44,7 @@ import { AlertService } from './services/alertService'
   bootstrap: [AppComponent],
   entryComponents: [
     CadastroUsuarioModalComponent,
-    ModalUsuarioTemplate
+    ModalUsuarioTemplateComponent
   ]
 })
 export class AppModule { }
