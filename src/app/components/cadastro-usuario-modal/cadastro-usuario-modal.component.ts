@@ -82,7 +82,6 @@ export class ModalUsuarioTemplateComponent {
         this.httpService.post("usuarios/criar", JSON.stringify(this.usuario), 
         (callback: IUsuarioCriarRetornoModel, sucesso: boolean) => { 
             if (sucesso) {
-                debugger;
                 this.destruirTodosAlerts();
                 this.criarAlert(EAlertType.Success, "Sucesso!", `Usuário ${ callback.objeto.login } cadastrado com sucesso.`);
             }                
