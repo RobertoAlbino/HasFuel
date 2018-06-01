@@ -1,21 +1,15 @@
 import { Routes } from '@angular/router';
-
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { MapsComponent } from './components/maps/maps.component';
 
 export const rootRouterConfig: Routes = [
     { 
         path: '', 
-        redirectTo: 'login', 
+        redirectTo: 'maps', 
         pathMatch: 'full' 
     },
-    {   
-        path: 'login', 
-        component: LoginComponent  
-    },
     { 
-        path: 'home', 
-        component: HomeComponent
+        path: 'maps', 
+        component: MapsComponent
     }
 ]
 

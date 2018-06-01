@@ -1,0 +1,9 @@
+<div id="map" allow="geolocation *;">
+    <agm-map [fullscreenControl]="true" [latitude]="59.326242" [longitude]="17.8419719">
+    </agm-map>
+    <p *ngFor="let alert of alerts">
+        <ngb-alert [dismissible]="true" [type]="alert.tipo" (close)="alertService.destruirAlert(alerts)">
+            <strong> {{ alert.strong }} </strong> {{alert.mensagem}}
+        </ngb-alert>
+    </p>
+</div>

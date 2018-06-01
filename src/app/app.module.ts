@@ -6,15 +6,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpParams, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'
+import { AgmCoreModule } from '@agm/core';
 
 // Rotas
 import { rootRouterConfig } from './app.routes'
 
 // Componentes da aplicação
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { CadastroUsuarioModalComponent, ModalUsuarioTemplateComponent } from './components/cadastro-usuario-modal/cadastro-usuario-modal.component'
-import { HomeComponent } from './components/home/home.component';
+import { MapsComponent } from './components/maps/maps.component';
 
 // Serviços da aplicação
 import { HttpService } from './services/httpService'
@@ -24,10 +23,7 @@ import { AlertService } from './services/alertService'
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    CadastroUsuarioModalComponent,
-    ModalUsuarioTemplateComponent,
-    HomeComponent
+    MapsComponent
   ],  
   imports: [
     BrowserModule,
@@ -35,16 +31,15 @@ import { AlertService } from './services/alertService'
     FormsModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: true }) 
+    RouterModule.forRoot(rootRouterConfig, { useHash: true }) ,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAv1xzFrPzHmh8vjXQ7RhscEudWPMvlVL4'
+    })
   ],
   providers: [ 
     HttpService,
     AlertService
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    CadastroUsuarioModalComponent,
-    ModalUsuarioTemplateComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

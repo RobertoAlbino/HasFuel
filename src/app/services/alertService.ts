@@ -17,4 +17,8 @@ export class AlertService {
             mensagem: mensagem
         }
     }
+
+    public destruirAlert(alertsList: Array<IAlert>) {
+        alertsList.pop();
+    }
 }
