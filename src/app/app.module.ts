@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpParams, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'
 import { AgmCoreModule } from '@agm/core';
+import { ToastrModule } from 'ngx-toastr';
 
 // Rotas
 import { rootRouterConfig } from './app.routes'
@@ -34,7 +35,8 @@ import { AlertService } from './services/alertService'
     RouterModule.forRoot(rootRouterConfig, { useHash: true }) ,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAv1xzFrPzHmh8vjXQ7RhscEudWPMvlVL4'
-    })
+    }),
+    ToastrModule.forRoot()
   ],
   providers: [ 
     HttpService,

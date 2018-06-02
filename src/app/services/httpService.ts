@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class HttpService {
 
-    private server: string = 'https://controle-java-backend.herokuapp.com/api/';
-    private sucesso: boolean = true;
     private header: HttpHeaders = new HttpHeaders ({
         'Content-Type':  'application/json'
     }); 
@@ -13,38 +11,38 @@ export class HttpService {
     constructor(private http: HttpClient) {}
 
     public get(path: string, callback: Function) {
-        this.http.get(this.server + path, { 
-            headers: this.header 
+        this.http.get(path, {
+            headers: this.header
         }).subscribe (
-            data  => { callback(data, this.sucesso);  },
-            error => { callback(error, !this.sucesso) }
+            data  => { callback(data,  true);  },
+            error => { callback(error, false) }
         );  
     }
 
     public post(path: string, params: string, callback: Function) {
-        this.http.post(this.server + path, params, { 
-            headers: this.header 
+        this.http.post(path, params, { 
+            headers: this.header    
         }).subscribe (
-            data  => { callback(data, this.sucesso);  },
-            error => { callback(error, !this.sucesso) }
+            data  => { callback(data,  true);  },
+            error => { callback(error, false) }
         );
     }
 
     public put(path: string, params: string, callback: Function) {
-        this.http.put(this.server + path, params, { 
+        this.http.put(path, params, { 
             headers: this.header 
         }).subscribe (
-            data  => { callback(data, this.sucesso);  },
-            error => { callback(error, !this.sucesso) }
+            data  => { callback(data,  true);  },
+            error => { callback(error, false) }
         ); 
     }
 
-    public delete(path: string, params: string, callback: Function) {
-        this.http.delete(this.server + path, { 
+    public delete(api: string, path: string, params: string, callback: Function) {
+        this.http.delete(path, { 
             headers: this.header 
         }).subscribe (
-            data  => { callback(data, this.sucesso);  },
-            error => { callback(error, !this.sucesso) }
+            data  => { callback(data,  true);  },
+            error => { callback(error, false) }
         ); 
     }
 }
