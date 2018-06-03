@@ -17,10 +17,10 @@ import { IPlaceGoogleResponse, IPlaceGoogleObject } from '../../interfaces/IPlac
 export class MapsComponent {
 
     @ViewChild(AgmMap)
-    private map: AgmMap;
-    private gasStationList: Array<IPlaceGoogleObject> = new Array<IPlaceGoogleObject>();
-    private userLatitude: Number;
-    private userLongitude: Number;
+    public map: AgmMap;
+    public gasStationList: Array<IPlaceGoogleObject> = new Array<IPlaceGoogleObject>();
+    public userLatitude: Number;
+    public userLongitude: Number;
 
     constructor(private modalService: NgbModal,
         private httpService: HttpService,
