@@ -1,9 +1,22 @@
 <div id="map" allow="geolocation *;">
-    <agm-map [fullscreenControl]="true" [latitude]="map.latitude" [longitude]="map.longitude">
-        <agm-marker
-            [latitude]="0"
-            [longitude]="0" 
-            [iconUrl]="">
+    <agm-map [latitude]="userLatitude" 
+             [longitude]="userLongitude"
+             [disableDefaultUI]="false">
+        <agm-marker id="user-location" name="user-location"
+            [latitude]="userLatitude"
+            [longitude]="userLongitude"
+            [iconUrl]="'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png'">
+            <agm-info-window>
+                <strong>Você está aqui.</strong>
+            </agm-info-window>
+        </agm-marker>
+        <agm-marker id="gas-station-location" name="gas-station-location" *ngFor="let gasStation of gasStationList; let i = index"
+            [latitude]="gasStation.geometry.location.lat"
+            [longitude]="gasStation.geometry.location.lng" 
+            [iconUrl]="gasStation.icon">
+            <agm-info-window>
+                <strong>{{ gasStation.name }}</strong>
+            </agm-info-window>
         </agm-marker>
     </agm-map>
 </div>
