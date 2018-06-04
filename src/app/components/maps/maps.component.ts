@@ -85,7 +85,6 @@ export class MapsComponent {
                         sucesso: Boolean) => {
                         if (sucesso) {
                             googleLocalResponse.forEach(function (key, value) {
-                                debugger;
                                 let newGasStation: IPlaceGoogleObject = {
                                     geometry: {
                                         location: {
