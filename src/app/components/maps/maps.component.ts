@@ -19,8 +19,8 @@ export class MapsComponent {
     @ViewChild(AgmMap)
     public map: AgmMap;
     public gasStationList: Array<IPlaceGoogleObject> = new Array<IPlaceGoogleObject>();
-    public userLatitude: Number;
-    public userLongitude: Number;
+    public userLatitude: Number = 0;
+    public userLongitude: Number = 0;
 
     constructor(private modalService: NgbModal,
         private httpService: HttpService,
