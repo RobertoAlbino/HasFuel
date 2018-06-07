@@ -1,5 +1,4 @@
 const express = require('express');
-var cors = require('cors');
 const app = express();
 const path = require('path');
 
@@ -14,7 +13,6 @@ const forceSSL = function() {
   }
 }
 app.use(forceSSL());
-app.use(cors)
 app.use(express.static(__dirname + '/dist'));
 app.listen(process.env.PORT || 8080);
 
